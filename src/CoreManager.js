@@ -45,6 +45,15 @@ type FileController = {
 type InstallationController = {
   currentInstallationId: () => Promise;
 };
+type NotificationController = {
+  urlB64ToUint8Array: (base64String: string) => String;
+  requestPermission: () => ?Boolean;
+  notification: (title: string, options: ?object) => void;
+  enableServiceWorker: () => ServiceWorker;
+  
+  triggerPushNotification: (subscribeServer: string, publicVapidKey: string) => Boolean;
+  getRegistrationServiceWorker: () => ServiceWorkerRegistration;
+};
 type ObjectController = {
   fetch: (object: ParseObject | Array<ParseObject>, forceFetch: boolean, options: RequestOptions) => Promise;
   save: (object: ParseObject | Array<ParseObject | ParseFile>, options: RequestOptions) => Promise;
@@ -181,6 +190,7 @@ const config: Config & { [key: string]: mixed } = {
   SERVER_AUTH_TOKEN: null,
   LIVEQUERY_SERVER_URL: null,
   ENCRYPTED_KEY: null,
+  SERVICE_WORKER: null,
   VERSION: 'js' + require('../package.json').version,
   APPLICATION_ID: null,
   JAVASCRIPT_KEY: null,
@@ -265,6 +275,20 @@ module.exports = {
 
   getInstallationController(): InstallationController {
     return config['InstallationController'];
+  },
+
+  setNotificationController(controller: NotificationController) {
+    requireMethods('NotificationController', [
+      'requestPermission',
+      'notification',
+      'triggerPushNotification',
+      'getRegistrationServiceWorker'
+    ], controller);
+    config['NotificationController'] = controller;
+  },
+
+  getNotificationController(): NotificationController {
+    return config['NotificationController'];
   },
 
   setObjectController(controller: ObjectController) {

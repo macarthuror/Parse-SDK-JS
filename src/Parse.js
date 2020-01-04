@@ -317,6 +317,18 @@ if (process.env.PARSE_BUILD === 'node') {
   Parse.Hooks = require('./ParseHooks');
 }
 
+if (process.env.PARSE_BUILD === 'browser') {
+  /**
+   * Flag that indicates whether Browser Notification is enabled.
+   *
+   * @static
+   */
+  Parse.isNotificationEnabled = function() {
+    return Notification.permission;
+  }
+  Parse.Notification = require('./Notification');
+}
+
 // For legacy requires, of the form `var Parse = require('parse').Parse`
 Parse.Parse = Parse;
 

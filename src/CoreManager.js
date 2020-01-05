@@ -46,13 +46,9 @@ type InstallationController = {
   currentInstallationId: () => Promise;
 };
 type NotificationController = {
-  urlB64ToUint8Array: (base64String: string) => String;
-  requestPermission: () => ?Boolean;
-  notification: (title: string, options: ?object) => void;
-  enableServiceWorker: () => ServiceWorker;
-  
-  triggerPushNotification: (subscribeServer: string, publicVapidKey: string) => Boolean;
-  getRegistrationServiceWorker: () => ServiceWorkerRegistration;
+  permissionStatus: () => String;
+  permission: () => Promise;
+  notification: (title: string, options?: object) => Promise;
 };
 type ObjectController = {
   fetch: (object: ParseObject | Array<ParseObject>, forceFetch: boolean, options: RequestOptions) => Promise;
@@ -278,12 +274,7 @@ module.exports = {
   },
 
   setNotificationController(controller: NotificationController) {
-    requireMethods('NotificationController', [
-      'requestPermission',
-      'notification',
-      'triggerPushNotification',
-      'getRegistrationServiceWorker'
-    ], controller);
+    requireMethods('NotificationController', ['permissionStatus', 'permission', 'notification'], controller);
     config['NotificationController'] = controller;
   },
 

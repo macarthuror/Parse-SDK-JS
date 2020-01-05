@@ -213,6 +213,7 @@ Parse.GeoPoint = require('./ParseGeoPoint').default;
 Parse.Polygon = require('./ParsePolygon').default;
 Parse.Installation = require('./ParseInstallation').default;
 Parse.LocalDatastore = require('./LocalDatastore');
+Parse.Notification = require('./Notification');
 Parse.Object = require('./ParseObject').default;
 Parse.Op = {
   Set: ParseOp.SetOp,
@@ -304,6 +305,15 @@ Parse.isEncryptedUserEnabled = function() {
   return Parse.encryptedUser;
 }
 
+/**
+ * Flag that indicates whether Notification status.
+ *
+ * @static
+ */
+Parse.isNotificationEnabled = function() {
+  return Parse.Notification.permissionStatus();
+}
+
 CoreManager.setCryptoController(CryptoController);
 CoreManager.setInstallationController(InstallationController);
 CoreManager.setRESTController(RESTController);
@@ -315,18 +325,6 @@ if (process.env.PARSE_BUILD === 'node') {
     CoreManager.set('USE_MASTER_KEY', true);
   }
   Parse.Hooks = require('./ParseHooks');
-}
-
-if (process.env.PARSE_BUILD === 'browser') {
-  /**
-   * Flag that indicates whether Browser Notification is enabled.
-   *
-   * @static
-   */
-  Parse.isNotificationEnabled = function() {
-    return Notification.permission;
-  }
-  Parse.Notification = require('./Notification');
 }
 
 // For legacy requires, of the form `var Parse = require('parse').Parse`

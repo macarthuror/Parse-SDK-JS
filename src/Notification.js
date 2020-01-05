@@ -14,7 +14,7 @@ const Notification = {
 
   notification(title: string, options: object): Promise {
     const controller = CoreManager.getNotificationController();
-    controller.notification(title, options);
+    return controller.notification(title, options);
   }
 
 };

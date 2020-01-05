@@ -10,13 +10,11 @@ const NotificationController = {
         console.log('You already have notifications permission');
         return true;
       } else if (window.Notification.permission === 'denied') {
-        console.error('The user needs to allow notifications manually');
-        throw false;
+        throw 'The user needs to allow notifications manually';
       }
       return window.Notification.requestPermission();
     } else {
-      console.error('Your browser is not compatible with notifications');
-      throw false;
+      throw 'Your browser is not compatible with notifications';
     }
   },
 
@@ -26,12 +24,10 @@ const NotificationController = {
         new Notification(title, options);
         return true;
       } catch (error) {
-        console.error('Problem showing notification', error);
-        throw false;
+        throw 'Problem showing notification';
       }
     } else {
-      console.error('Parse.Notification.permission() must be called first');
-      throw false;
+      throw 'Parse.Notification.permission() must be called first';
     }
   }
 

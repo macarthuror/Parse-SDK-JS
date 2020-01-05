@@ -69,8 +69,18 @@ const Parse = {
    */
   setLocalDatastoreController(controller: any) {
     CoreManager.setLocalDatastoreController(controller);
+  },
+
+  /**
+   * Call this method to set your Notification engine
+   * @param {NotificationController} controller
+   * @static
+   */
+  setNotificationController(controller: any) {
+    CoreManager.setNotificationController(controller);
   }
 };
+
 
 /** These legacy setters may eventually be deprecated **/
 /**

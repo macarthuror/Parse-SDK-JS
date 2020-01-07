@@ -208,6 +208,34 @@ Object.defineProperty(Parse, 'secret', {
     CoreManager.set('ENCRYPTED_KEY', value);
   }
 });
+
+/**
+ * @member Parse.serviceWorker
+ * @type string
+ * @static
+ */
+Object.defineProperty(Parse, 'serviceWorker', {
+  get() {
+    return CoreManager.get('SERVICE_WORKER');
+  },
+  set(value) {
+    CoreManager.set('SERVICE_WORKER', value);
+  }
+});
+
+/**
+ * @member Parse.swPublicKey
+ * @type string
+ * @static
+ */
+Object.defineProperty(Parse, 'swPublicKey', {
+  get() {
+    return CoreManager.get('SW_PUBLIC_KEY');
+  },
+  set(value) {
+    CoreManager.set('SW_PUBLIC_KEY', value);
+  }
+});
 /* End setters */
 
 Parse.ACL = require('./ParseACL').default;
@@ -335,6 +363,13 @@ if (process.env.PARSE_BUILD === 'node') {
     CoreManager.set('USE_MASTER_KEY', true);
   }
   Parse.Hooks = require('./ParseHooks');
+}
+
+if (process.env.PARSE_BUILD === 'browser') {
+  Parse.Notification = Object.assign({},
+    require('./Notification'),
+    require('./web-push')
+  );
 }
 
 // For legacy requires, of the form `var Parse = require('parse').Parse`

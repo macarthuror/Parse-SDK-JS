@@ -187,6 +187,7 @@ const config: Config & { [key: string]: mixed } = {
   LIVEQUERY_SERVER_URL: null,
   ENCRYPTED_KEY: null,
   SERVICE_WORKER: null,
+  SW_PUBLIC_KEY: null,
   VERSION: 'js' + require('../package.json').version,
   APPLICATION_ID: null,
   JAVASCRIPT_KEY: null,

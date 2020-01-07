@@ -7,7 +7,6 @@ const NotificationController = {
   async permission(): Promise {
     if ('Notification' in window) {
       if (window.Notification.permission === 'granted') {
-        console.log('You already have notifications permission');
         return true;
       } else if (window.Notification.permission === 'denied') {
         throw 'The user needs to allow notifications manually';

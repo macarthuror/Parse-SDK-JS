@@ -230,10 +230,10 @@ Object.defineProperty(Parse, 'serviceWorker', {
  */
 Object.defineProperty(Parse, 'swPublicKey', {
   get() {
-    return CoreManager.get('SW_PUBLIC_KEY');
+    return CoreManager.get('SERVICE_WORKER_KEY');
   },
   set(value) {
-    CoreManager.set('SW_PUBLIC_KEY', value);
+    CoreManager.set('SERVICE_WORKER_KEY', value);
   }
 });
 /* End setters */

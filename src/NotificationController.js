@@ -17,13 +17,13 @@ const NotificationController = {
     }
   },
 
-  async notification(title: string, options: object): Promise {
+  async notification(title: string, options?: any): Promise {
     if (window.Notification.permission === 'granted') {
       try {
         new Notification(title, options);
         return true;
       } catch (error) {
-        throw 'Problem showing notification';
+        throw 'Problem showing notification' + error;
       }
     } else {
       throw 'Parse.Notification.permission() must be called first';

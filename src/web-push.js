@@ -23,7 +23,7 @@ const NotificationController = {
       }
     }
     if ('serviceWorker' in navigator && 'PushManager' in window) {
-      const URL_SERVICE_WORKER = CoreManager.get('SERVICE_WORKER');
+      const URL_SERVICE_WORKER = CoreManager.get('SERVICE_WORKER') || 'sw.js';
       return navigator.serviceWorker.register(URL_SERVICE_WORKER);
     } else {
       throw 'Push messaging is not supported';
@@ -31,7 +31,7 @@ const NotificationController = {
   },
 
   subscribe(): ?Promise {
-    const applicationServerPublicKey = CoreManager.get('SW_PUBLIC_KEY');
+    const applicationServerPublicKey = CoreManager.get('SERVICE_WORKER_KEY');
     const applicationServerKey = this.urlB64ToUint8Array(applicationServerPublicKey);
     return navigator.serviceWorker.getRegistration()
       .then((data) => {

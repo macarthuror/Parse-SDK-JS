@@ -48,7 +48,7 @@ type InstallationController = {
 type NotificationController = {
   permissionStatus: () => String;
   permission: () => Promise;
-  notification: (title: string, options?: object) => Promise;
+  notification: (title: string, options?: any) => Promise;
 };
 type ObjectController = {
   fetch: (object: ParseObject | Array<ParseObject>, forceFetch: boolean, options: RequestOptions) => Promise;
@@ -187,7 +187,7 @@ const config: Config & { [key: string]: mixed } = {
   LIVEQUERY_SERVER_URL: null,
   ENCRYPTED_KEY: null,
   SERVICE_WORKER: null,
-  SW_PUBLIC_KEY: null,
+  SERVICE_WORKER_KEY: null,
   VERSION: 'js' + require('../package.json').version,
   APPLICATION_ID: null,
   JAVASCRIPT_KEY: null,

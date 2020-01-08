@@ -12,7 +12,7 @@ const Notification = {
     return controller.permission();
   },
 
-  notification(title: string, options: object): Promise {
+  notification(title: string, options?: any): Promise {
     const controller = CoreManager.getNotificationController();
     return controller.notification(title, options);
   }
